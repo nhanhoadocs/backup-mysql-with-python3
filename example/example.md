@@ -8,7 +8,7 @@
     "mysql": {
         "user": "MYSQL_USER",
         "password": "MYSQL_PASSWORD",
-        "backup_type": "table", 
+        "backup_type": "all", 
     ...
 
     "delete_old_file": {
