@@ -109,7 +109,7 @@ Sửa file setting tại  `/opt/backup_mysql/settings/settings.json`. Trong đó
 - "sync": true / false 
 
     ```
-    Có hoặc không sync dữ liệu. Nếu chọn *true*, 2 server phải được cài đặt rsync và phải SSH less không cần password với nhau.
+    Có hoặc không sync dữ liệu. Nếu chọn true, 2 server phải được cài đặt rsync và phải SSH less không cần password với nhau.
     ```
 
 - "send_notify": true / false 
@@ -121,7 +121,7 @@ Sửa file setting tại  `/opt/backup_mysql/settings/settings.json`. Trong đó
 - "delete_old_file": true / false
 
     ```
-    Có hoặc không gửi xóa các file backup cũ trên server chạy script. Nếu có xóa trong vòng "remove_days" ngày.
+    Có hoặc không xóa các file backup cũ trên server chạy script. Nếu có, xóa trong vòng "remove_days" ngày.
     ```
 
 
@@ -131,7 +131,8 @@ Sửa file setting tại  `/opt/backup_mysql/settings/settings.json`. Trong đó
 crontab -e
 ```
 
-Add the following line. Interval backup in 2 hours
+Thêm crontab, chú ý đường dẫn của `env` và file `run_backup.py`
+
 
 ```
 0 */2 * * * source /opt/backup_mysql/env/bin/activate && python /opt/backup_mysql/run_backup.py
