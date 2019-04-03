@@ -10,7 +10,7 @@ Script backup mysql sử dụng python3
 # Tính năng 
 
 - Backup mysql database.
-- Gửi thông báo backup đến Slack + telegram.
+- Gửi thông báo backup đến Slack, Telegram, Email
 - Tự động sync đến FTP server.
 - Xóa các folder backup cũ trong vòng **x** ngày
 
