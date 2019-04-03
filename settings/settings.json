@@ -28,5 +28,16 @@
         "send_notify": true,
         "token": "your_slack_token",
         "channel": "your_slack_channel"
+    },
+    "email": {
+        "send_notify": true,
+        "smtp_server": "your_smtp_server",
+        "smtp_user": "your_user_email@your_smtp_server",
+        "smtp_password": "your_email_password",
+        "smtp_from": "This is sender <your_user_email@your_smtp_server>",
+        "smtp_TLS": true,
+        "smtp_port": 587,
+        "email_subject": "Test backup report {}",
+        "receiver_email": "to_email"
     }
 }

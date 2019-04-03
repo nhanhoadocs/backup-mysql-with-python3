@@ -23,11 +23,32 @@ def convert_bytes(num):
         num /= 1024.0
 
 def render_message_telegram(datetime, file_size, file_name):
-    string = "``` [Backup Database]\n" + "Time: " + datetime + "\n" "Backup file name: " + file_name + "\n" "Backup file size: " + file_size + "\n"  + "```"
+    string = """```
+[Backup Database]
+Time: {datetime}
+Backup file name: {file_name}
+Backup file size: {file_size}
+```""".format(datetime=datetime, file_name=file_name, file_size=file_size)
+
     return string
 
 def render_message_slack(datetime, file_size, file_name):
-    string = "``` [Backup Database]\n" + "Time: " + datetime + "\n" "Backup file name: " + file_name + "\n" "Backup file size: " + file_size + "\n"  + "```"
+    string = """```
+[Backup Database]
+Time: {datetime}
+Backup file name: {file_name}
+Backup file size: {file_size}
+```""".format(datetime=datetime, file_name=file_name, file_size=file_size)
+
+    return string
+
+def render_message_email(datetime, file_size, file_name):
+    string = """
+        Time: {time} <br>
+        Backup file name: {file_name} <br>
+        Backup file size: {file_size} <br>
+        """.format(time=datetime, file_name=file_name, file_size=file_size)
+    
     return string
 
 def remove_old_folder(settings):

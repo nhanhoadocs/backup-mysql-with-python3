@@ -9,6 +9,8 @@ logging.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s', filename='
 with open(app_path + '/settings/settings.json') as data:
     settings = json.load(data)
 
+# print(settings)
+
 def run_backup(settings):
     try:
         backup = Backup(settings)

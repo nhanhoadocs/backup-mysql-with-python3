@@ -3,6 +3,7 @@ import time
 import datetime
 from .slack_notify import Slack
 from .telegram_notify import Telegram
+from .email_notify import EmailNotify
 import logging
 from utils import common
 
@@ -24,7 +25,8 @@ class Backup(object):
         self.is_sync                = settings["sync"]["sync"]
         self.is_delete_file         = settings["delete_old_file"]["delete_old_file"]
         self.is_send_notify_telegram   = settings["telegram"]["send_notify"]
-        self.is_send_notify_slack = settings["slack"]["send_notify"]
+        self.is_send_notify_slack   = settings["slack"]["send_notify"]
+        self.is_sendmail            = settings["email"]["send_notify"]    
         self.backup_type            = settings["mysql"]["backup_type"]  
 
         self.notify_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -43,22 +45,27 @@ class Backup(object):
         try:
             os.system(create_backup_dir) 
             os.system(backup_command)
+
             backup_size = common.check_file_size(backup_dir + "/"+ self.output_startw + "_" + self.current_time +".sql.gz")
-            telegram_message = common.render_message_telegram(datetime=self.notify_date, file_size=backup_size, 
-                                                                    file_name=self.output_startw + "_" + self.current_time +".sql.gz" )
-            slack_message = common.render_message_telegram(datetime=self.notify_date, file_size=backup_size, 
-                                                                    file_name=self.output_startw + "_" + self.current_time +".sql.gz" )
-            # Delete old folder and sync
             if self.is_delete_file is True:
                 common.remove_old_folder(self.settings)
             if self.is_sync is True:
                 common.sync_to_ftp(self.settings)
             if self.is_send_notify_telegram is True:
+                telegram_message = common.render_message_telegram(datetime=self.notify_date, file_size=backup_size, 
+                                                                    file_name=self.output_startw + "_" + self.current_time +".sql.gz" )
                 telegram = Telegram(self.telegram_token, self.telegram_channel, telegram_message)
                 telegram.send_message()
             if self.is_send_notify_slack is True:
+                slack_message = common.render_message_telegram(datetime=self.notify_date, file_size=backup_size, 
+                                                                    file_name=self.output_startw + "_" + self.current_time +".sql.gz" )
                 slack = Slack(self.slack_token , self.slack_channel, slack_message)
-                slack.send_message() 
+                slack.send_message()
+
+            if  self.is_sendmail is True:
+                sendmail_message = common.render_message_email(datetime=self.notify_date, file_size=backup_size, file_name=self.output_startw + "_" + self.current_time +".sql.gz")
+                sendmail = EmailNotify(self.settings, self.notify_date, sendmail_message)
+                sendmail.send_email()
 
         except Exception as ex:
             logging.warning("backup " + ex)
