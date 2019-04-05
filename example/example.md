@@ -26,6 +26,7 @@
         "password": "MYSQL_PASSWORD",
         "backup_type": "database",
         "database": "my_database",
+        "tables": ""
     ...
     
     "slack": {
