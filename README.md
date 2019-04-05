@@ -41,7 +41,7 @@ pip3.6 install virtualenv
 
 ```
 cd /opt/
-git clone https://github.com/huytm/backup_mysql.git
+https://github.com/nhanhoadocs/backup-mysql-with-python3.git
 ```
 
 ### 4. Tạo virtual environmet và cài đặt thư viện cần thiết
