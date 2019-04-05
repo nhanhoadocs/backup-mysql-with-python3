@@ -65,7 +65,7 @@ Sửa file setting tại  `/opt/backup_mysql/settings/settings.json`. Trong đó
         "user": "MYSQL_USER",
         "password": "MYSQL_PASSWORD",
         "backup_type": "table", 
-        "database": "MYSQL_DATABASES",
+        "database": "MYSQL_DATABASE",
         "tables": "table1, table2, table3"
     },
     "backup": {
