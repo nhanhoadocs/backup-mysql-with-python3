@@ -30,7 +30,6 @@ yum install https://centos7.iuscommunity.org/ius-release.rpm -y
 yum install python-devel -y
 yum install python36-devel -y
 yum install python36 -y
-yum install python36u-mod_wsgi -y
 
 yum install python-pip -y
 yum install python36u-pip -y
